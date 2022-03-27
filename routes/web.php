@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// User register
+Route::get('/register', [UserController::class, 'create']);
+Route::post('/register', [UserController::class, 'store']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/board', [Controller::class, 'board'])->name('board');
+
+    // Movies
+    Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movie');
+    Route::put('/movie/{movie}', [MovieController::class, 'update']);
+    Route::delete('/movie/{movie}', [MovieController::class, 'destroy']);
+    Route::post('/movie', [MovieController::class, 'store']);
 });
