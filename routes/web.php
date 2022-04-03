@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MovieController;
+use App\Http\Controllers\Movies\MoviesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
+/*t
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -16,20 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// User register
-Route::get('/register', [UserController::class, 'create']);
-Route::post('/register', [UserController::class, 'store']);
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/board', [Controller::class, 'board'])->name('board');
 
-    // Movies
-    Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movie');
-    Route::put('/movie/{movie}', [MovieController::class, 'update']);
-    Route::delete('/movie/{movie}', [MovieController::class, 'destroy']);
-    Route::post('/movie', [MovieController::class, 'store']);
+//  Route::apiResource('movies', MoviesController::class);
+    Route::get('movies', [MoviesController::class, 'index'])->name('movies.index');
+    Route::get('movies/create', [MoviesController::class, 'create'])->name('movies.create');
+    Route::post('movies', [MoviesController::class, 'store'])->name('movies.store');
+    Route::get('movies/{movie}', [MoviesController::class, 'show'])->name('movies.show');
+    Route::get('movies/edit/{movie}', [MoviesController::class, 'edit'])->name('movies.edit');
+    Route::put('movies/{movie}', [MoviesController::class, 'update'])->name('movies.update');
+    Route::delete('movies/{movie}', [MoviesController::class, 'destroy'])->name('movies.destroy');
 });
