@@ -10,6 +10,10 @@
                     <a class="btn btn-link" href="{{ route('home') }}">
                         {{ __('Login') }}
                     </a>
+                    <a class="btn btn-link" href="{{ route('home') }}">
+                        <br>
+                        {{ __('Register') }}
+                    </a>
                 </div>
         </div>
     </body>

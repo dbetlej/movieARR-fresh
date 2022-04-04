@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header text-center">{{ __('Movie Board') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,15 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <a class="btn btn-link text-violet-700 bg-gray-100 font-bold" href="{{ route('movies.create') }}">
+                        <br>
+                        {{ __('ADD MOVIE') }}
+                    </a>
+                    <a class="btn btn-link text-violet-700 bg-gray-100 font-bold" href="{{ route('movies.store') }}">
+                        <br>
+                        {{ __('MOVIE LIST') }}
+                    </a>
+
                 </div>
             </div>
         </div>
